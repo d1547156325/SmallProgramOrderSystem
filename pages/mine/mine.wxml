@@ -1,0 +1,29 @@
+<view class="container">
+    <view class="header">
+      <view wx:if="{{judge}}">
+        <view >
+        <image src="{{userInfo.avatarUrl}}" class="userImg"></image>
+        </view>
+        <view class="userName"> {{userInfo.nickName}}</view>
+      </view>
+      <view wx:else>
+        <view >
+          <image src="../../images/photo.jpg" class="userImg"></image>
+        </view>
+        <view class="userName">没名字点餐</view>
+      </view>
+    </view>
+    
+  <view class="content">
+    <view class="coupon"><navigator url="../address/address">我的地址</navigator></view>
+    <view class="address">联系客服</view>
+    <view class="tel">客服电话: 18271344955</view>
+    <view class="coupon">关于我们</view>
+    <view wx:if="{{judge}}">
+      <view class="signOut" bindtap="removeSession">退出账号</view>
+    </view>
+    <view wx:else>
+      <view class="signOut" bindtap="gotologin">登录账号</view>
+    </view>
+  </view>
+</view>

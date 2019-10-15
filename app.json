@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/order/order",
+    "pages/orderDetails/orderDetails",
+    "pages/mine/mine",
+    "pages/menu/menu",
+    "pages/address/address",
+    "pages/dologin/dologin",
+    "pages/empower/empower",
+    "pages/phone/phone",
+    "pages/phoneLogin/phoneLogin",
+    "pages/empower1/empower1",
+    "pages/medetail/medetail",
+    "pages/pay/pay",
+    "pages/evaluate/evaluate"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFC640",
+    "navigationBarTitleText": "点餐小程序",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+
+"permission": {
+  "scope.userLocation": {
+    "desc": "你的位置信息将用于小程序位,接口的效果展示"
+  }
+},
+
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#FFD161",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icons/index.png",
+        "selectedIconPath": "icons/index_active.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "icons/order.png",
+        "selectedIconPath": "icons/order_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "icons/mine.png",
+        "selectedIconPath": "icons/mine_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

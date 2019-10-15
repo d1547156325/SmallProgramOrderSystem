@@ -1,0 +1,55 @@
+ <scroll-view scroll-y="true" style="height: {{scrollHeight}}px">
+<view class="detailPic">
+  <image src="http://www.meimingzi.store:9080/IMAGES/{{product.ppic}}"></image>
+</view>
+<view class="messageBlock">
+  <view class="Message">
+    <view class="detailMessage">
+      <text class="name">{{product.pname}} </text>
+      <text class="monthsell">月售{{product.pprice+368}}</text>
+      <text class="price" style="color:red">¥{{product.pprice}} <text>¥{{product.pprice+10}}</text></text>
+    </view>
+    <!--
+    <view class="addReduce">
+      <text class="iconfont icon-jian icon-li-circle" bindtap="reduce"></text>
+      <text class="orderNum"> {{num}} </text>
+      <text class="iconfont icon-jia plus-icon" bindtap="add"></text>
+    </view>
+    -->
+  </view>
+  <view class="otherMessage">
+    <view class="S_M">
+      商品信息
+    </view>
+    <view>
+      好吃就对啦！
+    </view>
+  </view>
+</view>
+
+<wxs src="../wxs/content.wxs" module="tools1" />
+<wxs src="../wxs/time.wxs" module="tools" />
+
+<!--评价  -->
+<view class="saySomething">
+  <view class="sayTitle">
+    <text>外卖评价（好评率100%）</text>
+    <text class="iconfont .icon-more" bindtap="toAllEvaluate">共{{remList.length}}条评价</text>       
+  </view>  
+     <view wx:for="{{remList}}" wx:key="{{index}}">
+<view class="sayList">
+    <view class="sayLeft">
+      <image src="../../images/me.jpg"></image>
+      <view class="Name">
+        <view class="name">{{item.cName}}******</view>
+        <view>{{tools1.sub1(item.content)}}</view>
+      </view>      
+    </view>
+    <view class="time">
+      {{tools.sub2(item.content)}}
+    </view>
+  </view>
+  </view>
+</view>
+
+</scroll-view>

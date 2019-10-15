@@ -1,0 +1,210 @@
+<!--pages/order/order.wxml-->
+<!--head -->
+
+<view class="header">
+  <view class="content-wrapper">
+    <view class="avatar">
+      <image src="../../images/food.jpg" style="width:64px;height:64px;"></image>
+    </view>
+    <view class="content">
+      <view class="title">
+        <image src="../../icons/hot.png" style="width:32px;height:16px;"></image>
+        <span class="name">没名字点餐</span>
+      </view>
+      <view class="description">
+        商家配送/38分钟送达
+      </view>
+      <view v-if="seller.supports" class="support">
+        <span class="icon" :class="classMap[seller.supports[0].type]">
+          <image src="../../icons/decrease.png" style="width:16px;height:16px;"></image>
+        </span>
+        <span class="text">在线支付满28减5</span>
+      </view>
+    </view>
+    <view class="supports-count">
+      <view class="count">5个</view>
+    </view>
+  </view>
+  <view class="bulletin-wrapper">
+    <image src="../../icons/gg.png" style="width:16px;height:16px;"></image>
+    <span class="bulletin-text">"没名字餐厅，一家好吃不贵的餐厅！"</span>
+  </view>
+  <view class="background">
+    <image  src="../../images/food.jpg" ></image>
+  </view>
+</view>
+<!--head -->
+
+<!--tab -->
+<view class="tab border-1px">
+  <view class="tab-item">
+    <a class="{{status==0 ? 'active':''}}" bindtap="tabChange" data-type="0">商品</a>
+  </view>
+  <view class="tab-item">
+    <a class="{{status==1 ? 'active':''}}" bindtap="tabChange" data-type="1">评论</a>
+  </view>
+  <view class="tab-item">
+    <a class="{{status==2 ? 'active':''}}" bindtap="tabChange" data-type="2">商家</a>
+  </view>
+</view>
+<!--tab -->
+
+
+<view class="goods" wx:if="{{status==0||item.status==status}}">
+
+
+  <!-- 左侧菜单 -->
+  <view class="list-left-menu">
+      <scroll-view scroll-y="true" style="height: {{scrollHeight}}px">
+    <view wx:for="{{goods}}" wx:key="unique" class="{{index==activeIndex?'list-left-menu-box-selected':'list-left-menu-box-unselect'}}" data-index="{{index}}" bindtap='selectMenu' data-index="{{item.id}}">
+      <view class="list-menu-name">{{item.fcategory}}</view>
+    </view>
+        </scroll-view>
+  </view>
+
+  <!-- 右侧菜单 -->
+  <scroll-view scroll-y="true" style='height:{{scrollHeight}}px;'scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <view class="content">
+      <view class='content-list' wx:for="{{listPro}}" wx:key="unique" wx:for-item="items" wx:for-index="indexs">
+        <view class='list-image-box' catchtap="goToDetail" data-index="{{items.id}}">
+          <image class="list-image" mode="widthFix" src='http://www.meimingzi.store:9080/IMAGES/{{items.ppic}}'></image>
+        </view>
+        <view class='issue-name' >
+          <view catchtap="goToDetail" data-index="{{items.id}}">{{items.pname}}</view>
+          <view style='margin-top:20rpx;color:#F05A86'>
+            ¥ {{items.pprice}}.00
+          <i class="iconfont icon-jia plus-icon"  data-index="{{items.id}}" bindtap="addCart"></i>
+          </view> 
+        </view>
+    </view>
+    </view>
+  </scroll-view>
+
+  <!--shopCart-->
+  <view>
+    <view>
+      <view class="shopCart">
+        <view class="content" bindtap="toggleList">
+          <view class="content-left">
+            <view class="logo-wrapper">
+            <block wx:if="{{totalCount == 0}}">
+              <view class="logo highlight1">
+                <view class="iconfont icon-gouwuche highlight"></view>
+              </view>
+              </block>
+              <block wx:else>
+              <view class="logo highlight">
+                <view class="iconfont icon-gouwuche highlight"></view>
+              </view>
+              </block>
+              <view class="num" wx:if="{{totalCount> 0}}">{{totalCount}}</view>
+            </view>
+            <view class="price highlight">￥{{totalPrice}}</view>
+            <view class="desc">另需配送费￥{{deliveryPrice}}元</view>
+          </view>
+          <view class="content-right " catchtap="pay">
+            <view class="pay enough1" :class="payClass" wx:if="{{totalCount==0}}">
+              <!--{{payDesc}}-->
+              无商品
+            </view>
+            <view class="pay enough" :class="payClass" bindtap="goToPay" wx:else>
+              <!--{{payDesc}}-->
+              去结算
+            </view>
+          </view>
+        </view>
+
+
+        <view class="shopcart-list" style="display:{{cartShow}}">
+  <view style='background:#F0F0F0;height:30px'>
+    <label class='label-cart-bar'>
+      <label style='padding:5px'>已选商品</label>
+    </label>
+    <label class='icon-clear' bindtap='empty'>
+      <i class="iconfont icon-lajitong"></i>
+      <label class="label-clear">清空购物车</label>
+    </label>
+  </view >
+
+      <view class="list-content">
+        <view class="shopcart-food" wx:for="{{carArray}}">
+              <text class="name">{{item.name}}</text>
+        <view style='float:right'>
+          <label class='activity-color'>¥ {{item.price*item.num}}</label>
+          <i class="iconfont icon-jian icon-li-circle" data-index="{{item.index}}" bindtap="decreaseShopCart"></i>
+          {{item.num}}
+          <i class="iconfont icon-jia plus-icon" data-index="{{item.index}}" bindtap="addShopCart"></i>
+        </view>
+
+              <!--cartControl-->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view name="fade">
+    <view class="list-mask" wx:if="{{listShow}}" bindtap="hideList"></view>
+  </view>
+</view>
+
+
+<wxs src="../wxs/content.wxs" module="tools1" />
+<wxs src="../wxs/time.wxs" module="tools" />
+
+<!--评论-->
+<view calss="pingjia" wx:if="{{status==1||item.status==status}}">
+
+<!--评价  -->
+<view class="saySomething">
+  <view class="sayTitle">
+    <text>商家评价（好评率100%）</text>
+    <text class="iconfont .icon-more" bindtap="toAllEvaluate">共{{remList.length}}条评价</text>     
+  </view>  
+   <scroll-view scroll-y="true" style="height: {{scrollHeight}}px">
+   <view wx:for="{{remList}}" wx:key="{{index}}">
+  <view class="sayList">
+    <view class="sayLeft">
+      <image src="../../images/me.jpg"></image>
+      <view class="Name">
+        <view class="name">{{item.cName}}</view>
+        <view>{{tools1.sub1(item.content)}}</view>
+      </view>      
+    </view>
+    <view class="time">
+      {{tools.sub2(item.content)}}
+    </view>
+  </view>
+  </view>
+  </scroll-view>
+</view>
+
+</view>
+
+<!--商家-->
+<view  wx:if="{{status==2||item.status==status}}">
+    <view class="S_top">
+      <view class="S_title">
+        商家信息
+      </view>
+      <view class="iconfont icon-map">
+      <image src="../../icons/mine_1.png" style="width:16px;height:16px;"></image>        宜昌市三峡大学sogo广场</view>
+      <view class="iconfont icon-time2">
+          <image src="../../icons/time.png" style="width:16px;height:16px;"></image>配送时间：10:30-20:00</view>
+      <view class="iconfont icon-car">
+            <image src="../../icons/ps.png" style="width:16px;height:16px;"></image>商家提供配送服务</view>
+      <view class="iconfont icon-money">
+           <image src="../../icons/money.png" style="width:16px;height:16px;"></image>¥10元起送｜配送费¥3</view>
+    </view>
+    <view class="S_top">
+      <view class="S_title">
+        店内活动
+      </view>
+      <view class="iconfont icon-zhekou">
+            <image src="../../icons/decrease.png" style="width:16px;height:16px;"></image>满22减17；满50减33（在线支付专享）</view>
+      <view class="iconfont icon-zhekou">
+            <image src="../../icons/decrease.png" style="width:16px;height:16px;"></image>折扣商品2.6折起（在线支付专享)</view>
+      <view class="iconfont icon-zhekou">
+            <image src="../../icons/decrease.png" style="width:16px;height:16px;"></image>部分商品第二份半价</view>
+    </view>
+</view>

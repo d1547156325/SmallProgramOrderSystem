@@ -1,0 +1,4 @@
+var sub1 = function (val) {
+    return val.substring(0, val.length-10)
+}
+module.exports.sub1 = sub1;

@@ -1,0 +1,101 @@
+<scroll-view scroll-y="true" style="height: {{scrollHeight}}px">
+  <view class="orderBlock">
+    <view class="head" wx:if="{{!restaurant}}">
+      <view class="address" bindtap="toMyAddress">
+        <view class="map">
+          <view class="font1">{{customer.caddress}}</view>
+          <view class="iconfont">
+            <text>{{customer.cname}}（{{customer.sex}}）</text>
+            <text class="phone">{{customer.ctel}}</text>
+          </view>
+        </view>
+        <view class="iconfont"></view>
+      </view>
+      <view class="time">
+        <view class="iconfont icon-time">
+          <text>立即送出</text>
+          <text>（约{{time}}送达）</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="proMessage">
+    <view class="Title">
+      <view class="title">
+        <image src="../../images/food.jpg"></image>
+        没名字餐厅
+      </view>
+      <view class="iconfont icon-phone" bindtap="calling">联系商家</view>
+    </view>
+    <view class="list" wx:for="{{cararray}}" >
+      <view class="listLeft">
+        <view class="foodPic">
+          <image src="http://www.meimingzi.store:9080/IMAGES/{{item.ppic}}"></image>
+        </view>
+        <view class="message">
+          <text>{{item.name}}</text>
+          <text class="price">¥{{item.price}} <text class="oldPrice">¥{{item.price+10}}</text></text>
+        </view>
+      </view>
+      <view class="listRight">
+        X{{item.num}}
+      </view>
+    </view>
+    <view class="orherPrice">
+      <text>餐盒费</text>
+      <text>¥1</text>
+    </view>
+    <view class="smallBorder">
+      <view class="orherPrice">
+        <text>配送</text>
+        <text>¥3</text>
+      </view>
+    </view>
+    <view class="orherPrice">
+      <text></text>
+      <text>小计¥{{totalPrice+4}}</text>
+    </view>
+  </view>
+
+  <view class="orderType">
+    <text>支付方式</text>
+    <text>微信支付</text>
+  </view>
+
+  <view class="other">
+    <view>
+      <text>订单备注</text>
+      <textarea placeholder="请输入您的要求" />
+    </view>
+  </view>
+
+  <view class="submitOrder">
+    <text class="discount">合计<text class="price">¥{{totalPrice+4}}</text></text>
+
+    <text class="submit" bindtap="submitOrder">去支付</text>
+  </view>
+  <view class="padding">
+
+  </view>
+</scroll-view>
+
+
+<!-- 密码输入框 -->
+<view wx:if='{{showPayPwdInput == true}}'>
+    <view class='bg_layer'></view>
+    <view class='input_main'>
+        <view class='input_title'>
+            <view class='input_back' catchtap='hidePayLayer'><text></text></view>
+            <text>输入支付密码</text>
+        </view>
+        <view class='input_tip'><text>请输入电话号码后六位，验证通过后才可进行支付。</text></view>
+        <view class='input_row' catchtap='getFocus'>
+            <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+                <text wx:if='{{pwdVal.length>i}}'></text>
+            </view>
+        </view>
+        <view class='forget_pwd' catchtap='forGet'>忘记密码</view>
+        <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6'/>
+    </view>
+</view>

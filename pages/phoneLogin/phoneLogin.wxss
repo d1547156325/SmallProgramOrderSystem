@@ -1,0 +1,56 @@
+.form_group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form_group input, .form_group picker {
+  width: 676rpx;
+  border-bottom: 1px solid #ddd;
+  height: 121rpx;
+  padding-left: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  letter-spacing: 0;
+  line-height: 121rpx;
+}
+
+.form_group .sendmsg_input {
+  width: 370rpx;
+}
+
+.form_group .vertificate {
+  width: 326rpx;
+  border-bottom: 1px solid #ddd;
+  height: 121rpx;
+  padding-left: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  letter-spacing: 0;
+  line-height: 121rpx;
+  text-align: center;
+  color: #34c9c3;
+}
+
+.vertificate text {
+  color: gray;
+}
+
+.placeholder_style {
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #dbdbdb;
+  letter-spacing: 0;
+}
+.btn1 {
+  width: 85%;
+  height: 6%;
+  margin-top: 10rpx;
+  background-color:  #FFD161;
+  color: black;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

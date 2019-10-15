@@ -1,0 +1,167 @@
+<!--tab -->
+<view class="tab border-1px">
+  <view class="tab-item">
+    <a class="{{status==0 ? 'active':''}}" bindtap="tabChange" data-type="0">全部订单</a>
+  </view>
+  <view class="tab-item">
+    <a class="{{status==1 ? 'active':''}}" bindtap="tabChange" data-type="1">已完成</a>
+  </view>
+  <view class="tab-item">
+    <a class="{{status==2 ? 'active':''}}" bindtap="tabChange" data-type="2">未完成</a>
+  </view>
+  <view class="tab-item">
+    <a class="{{status==3 ? 'active':''}}" bindtap="tabChange" data-type="3">已取消</a>
+  </view>
+</view>
+<!--tab -->
+<view class="all" wx:if="{{status==0||item.status==status}}">
+  <scroll-view class="tableView" scroll-y="true" style="height: {{scrollHeight}}px">
+    <view wx:for="{{orders}}" class="productInfo" wx:for-item="item" data-index="{{item.id}}">
+      <view class="orderListTitle" bindtap="toOrderDetail" data-index="{{item.id}}">
+        <image src="{{userInfo.avatarUrl}}" class="userImg"></image>
+        <label class="userName">{{userInfo.nickName}}</label>
+        <label class="state">{{item.state}}</label>
+      </view>
+      <view class="flexItem columnStyle tableViewCell">
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">下单时间</label>
+          <label class="fontSize14">{{item.odatetime}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">地址：</label>
+          <label class="color54 fontSize12">{{customers.caddress}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">联系电话：</label>
+          <label class="color54 fontSize12">{{customers.ctel}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">订单号</label>
+          <label class="color54 fontSize12">{{item.id}}</label>
+        </view>
+      </view>
+
+      <view class="allLast">
+        总价：<label class="totalprice">¥{{item.totalprice}}</label>
+        <navigator url="../menu/menu" hover-class="navigator-hover" class="continue">再来一单</navigator>
+        <navigator url="../evaluate/evaluate?oid={{item.id}}&pid={{customers.id}}" hover-class="navigator-hover" class="bg_y">评价</navigator>
+      </view>
+
+      <!--
+      <view class="orderListTitle">
+      <navigator url="../orderDetails/orderDetails?{{item.id}}">查看详情</navigator>
+      </view>
+      -->
+    </view>
+  </scroll-view>
+</view>
+
+
+<view class="finish" wx:if="{{status==1||item.status==status}}">
+  <scroll-view class="tableView" scroll-y="true" style="height: {{scrollHeight}}px">
+    <view wx:for="{{orders}}" class="productInfo" wx:for-item="item">
+      <view class="orderListTitle" bindtap="toOrderDetail" data-index="{{item.id}}">
+        <image src="{{userInfo.avatarUrl}}" class="userImg"></image>
+        <label class="userName">{{userInfo.nickName}}</label>
+        <label class="state">{{item.state}}</label>
+      </view>
+      <view class="flexItem columnStyle tableViewCell">
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">下单时间</label>
+          <label class="fontSize14">{{item.odatetime}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">地址：</label>
+          <label class="color54 fontSize12">{{customers.caddress}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">联系电话：</label>
+          <label class="color54 fontSize12">{{customers.ctel}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">订单号</label>
+          <label class="color54 fontSize12">{{item.id}}</label>
+        </view>
+      </view>
+      <view class="allLast">
+        总价：<label class="totalprice">¥{{item.totalprice}}</label>
+        <navigator url="../menu/menu" hover-class="navigator-hover" class="continue">再来一单</navigator>
+        <navigator url="../evaluate/evaluate?oid={{item.id}}&pid={{customers.id}}" hover-class="navigator-hover" class="bg_y">评价</navigator>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+
+<view class="unfinished" wx:if="{{status==2||item.status==status}}">
+  <scroll-view class="tableView" scroll-y="true" style="height: {{scrollHeight}}px">
+    <view wx:for="{{orders}}" class="productInfo" wx:for-item="item">
+      <view class="orderListTitle" bindtap="toOrderDetail" data-index="{{item.id}}">
+        <image src="{{userInfo.avatarUrl}}" class="userImg"></image>
+        <label class="userName">{{userInfo.nickName}}</label>
+        <label class="state">{{item.state}}</label>
+      </view>
+      <view class="flexItem columnStyle tableViewCell">
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">下单时间</label>
+          <label class="fontSize14">{{item.odatetime}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">地址：</label>
+          <label class="color54 fontSize12">{{customers.caddress}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">联系电话：</label>
+          <label class="color54 fontSize12">{{customers.ctel}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">订单号</label>
+          <label class="color54 fontSize12">{{item.id}}</label>
+        </view>
+      </view>
+
+      <view class="allLast">
+        总价：<label class="totalprice">¥{{item.totalprice}}</label>
+        <navigator url="../menu/menu" hover-class="navigator-hover" class="continue">再来一单</navigator>
+        <navigator url="../evaluate/evaluate?oid={{item.id}}&pid={{customers.id}}" hover-class="navigator-hover" class="bg_y">评价</navigator>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+
+<view class="remove" wx:if="{{status==3||item.status==status}}">
+  <scroll-view class="tableView" scroll-y="true" style="height: {{scrollHeight}}px">
+    <view wx:for="{{orders}}" class="productInfo" wx:for-item="item">
+      <view class="orderListTitle" bindtap="toOrderDetail" data-index="{{item.id}}">
+        <image src="{{userInfo.avatarUrl}}" class="userImg"></image>
+        <label class="userName">{{userInfo.nickName}}</label>
+        <label class="state">{{item.state}}</label>
+      </view>
+      <view class="flexItem columnStyle tableViewCell">
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">下单时间</label>
+          <label class="fontSize14">{{item.odatetime}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">地址：</label>
+          <label class="color54 fontSize12">{{customers.caddress}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">联系电话：</label>
+          <label class="color54 fontSize12">{{customers.ctel}}</label>
+        </view>
+        <view class="flexItem rowStyle marginBottom10 cellStyle">
+          <label class="color54 fontSize12">订单号</label>
+          <label class="color54 fontSize12">{{item.id}}</label>
+        </view>
+      </view>
+
+      <view class="allLast">
+        总价：<label class="totalprice">¥{{item.totalprice}}</label>
+        <navigator url="../menu/menu" hover-class="navigator-hover" class="continue">再来一单</navigator>
+        <navigator url="../evaluate/evaluate?oid={{item.id}}&pid={{customers.id}}" hover-class="navigator-hover" class="bg_y">评价</navigator>
+      </view>
+    </view>
+  </scroll-view>
+</view>

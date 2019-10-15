@@ -1,0 +1,25 @@
+<!--pages/dologin/dologin.wxml-->
+
+<text> \n </text>
+<text> \n </text>
+<text> \n </text>
+<text> \n </text>
+
+<view class="personal_info">
+	<view class="photo_wrap">
+	<!--	<image src="{{userInfo.avatarUrl}}" class="photo"></image>-->
+    	<image src="../../images/photo.jpg" class="photo"></image>
+      </view>
+      </view>
+      <text> \n </text>
+      <text> \n </text>
+      <text> \n </text>
+      <text> \n </text>
+<button class='btn1' open-type='getUserInfo'
+        bindgetuserinfo='doLogin'>
+    <!--<image class='btnImg' src='../../icons/wechat.png' ></image>-->
+    <view>微信登录</view>
+ </button>
+<text> \n </text>
+     <navigator url="../phoneLogin/phoneLogin" hover-class="other-navigator-hover" style="text-align:center">
+     <text style="font-size: 30rpx;color: #23238E">手机号登录/注册</text></navigator>

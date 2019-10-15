@@ -1,0 +1,69 @@
+<form bindsubmit="formSubmit">
+  <view class="people">
+    联系人
+  </view>
+  <view class="message">
+    <view>
+      <text>姓名</text><input name="name" placeholder="请填写收货人姓名" value="{{list.cname}}" bindinput="setName" placeholder-style="font-size:28rpx;color:#999;"/>
+    </view>
+    <view>
+      <text></text>
+      <view class="choose">
+         <!-- <view class="sir" bindtap="chooseId" data-id="先生">
+          <text class="{{id=='先生'?'quan iconfont icon-true':'quan'}}"></text>先生
+        </view>
+        <view bindtap="chooseId" data-id="女士">
+          <text class="{{id=='女士'?'quan iconfont icon-true':'quan'}}"></text>女士
+        </view>  -->
+        <radio-group name="sex">
+          <block wx:if="{{list.sex == '先生'}}">
+          <label><radio value="先生" color="#ffe400" checked/>先生</label>
+          <label><radio value="女士" color="#ffe400"/>女士</label>
+          </block>
+           <block wx:else>
+          <label><radio value="先生" color="#ffe400" />先生</label>
+          <label><radio value="女士" color="#ffe400" checked/>女士</label>
+          </block>
+        </radio-group> 
+      </view>
+    </view>
+    <view>
+      <text>手机</text><input name="phone" placeholder="请填写收货人手机号码" value="{{list.ctel}}" bindinput="setPhone" type="number" placeholder-style="font-size:28rpx;color:#999;"/>
+    </view>
+  </view>
+
+  <view class="people">
+    收货地址
+  </view>
+
+  <view class="message2">
+    <view class="iconfont icon-more" bindtap="getAddress">
+      <text class="width">小区/大厦/学校</text>
+      <view class="map">
+        <text class="iconfont icon-map"></text>
+        <!-- <view class="width2"> {{city}}</view> -->
+        <block wx:if="{{list.caddress == '' || list.caddress == null}}">
+          <input name="city" class="width2" value="{{city}}" disabled/>
+          </block>
+          <block wx:esle>
+              <block wx:if="{{city != '点击选择'}}">
+                 <input name="city" class="width2" value="{{city}}" disabled/>
+              </block>
+              <block wx:else>
+                <input name="city" class="width2" value="{{list.caddress}}" disabled/>
+              </block>
+          </block>
+      </view>
+    </view>
+    <view>
+      <text class="width">楼号-门牌号</text>
+      <input class="width2" name="cityDetail" placeholder="例：欣苑三栋222" bindinput="setCityDetail" value="{{cityDetail}}" placeholder-style="font-size:28rpx;color:#999;"/>
+    </view>
+  </view>
+  <!-- <view class="save" bindtap="saveAddress">
+    保存
+  </view> -->
+  <button class="save" formType="submit">保存</button>
+</form>
+
+

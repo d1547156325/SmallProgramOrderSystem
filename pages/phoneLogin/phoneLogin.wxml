@@ -1,0 +1,18 @@
+    
+    <text>\n</text>
+     <text>\n</text>
+      <text>\n</text>
+    <view class="form_group">
+      <input type="text" placeholder="手机号码" placeholder-class="placeholder_style" data-name="data_phone" value="{{data_phone}}" bindinput='getInputKey' />
+    </view>
+    <view class="form_group">
+      <input type="text" class="sendmsg_input" placeholder="短信验证码" data-name="data_code" value="{{data_code}}" placeholder-class="placeholder_style" bindinput='getInputKey' />
+      <view class='vertificate' bindtap="getVerificationCode">{{time}}
+        <text>{{suffix}}</text>
+      </view>
+    </view>
+     <text>\n</text>
+      <text>\n</text>
+    <button class='btn1' bindtap='judgeNumber'>
+    <view>登录</view>
+ </button>
